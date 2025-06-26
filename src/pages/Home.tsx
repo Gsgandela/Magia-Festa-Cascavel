@@ -230,8 +230,7 @@ export default function Home() {
               <h2>Cada cliente importa!</h2>
             </span>
             <p>
-              Quem já pediu sabe da qualidade das nossas receitas, estamos tirando aquela ideia de que
-              comida congelada tem de ser algo sem gosto, acompanhe abaixo os testemunhos de quem já comprou e aprovou.
+              Quem já pediu sabe da qualidade das nossas Decorações, acompanhe abaixo os testemunhos de quem já comprou e aprovou.
             </p>
           </header>
           <section className="carousel">
@@ -262,21 +261,21 @@ export default function Home() {
       </section>
       <section id="pricing" className="container">
         <header>
-          <p className="desktop-only">Planos e preços</p>
-          <h2>Nossos planos</h2>
+          <p className="desktop-only">Preços</p>
+          <h2>Nossas Decorações</h2>
         </header>
         <section className="even-columns gap-1.5">
           <div className="pricing-card">
             <span className="plan">
-              <h3>Básico</h3>
-              <p>Você tem direito a uma prova das comidas DonaFrost.</p>
+              <h3>Decoração simples</h3>
+              <p>Decoração simples sem balões.</p>
             </span>
             <h2>Grátis</h2>
             <Button text="Pedir agora" secondary />
             <span className="hr" />
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>Retire na loja</p>
+              <p>Montamos na hora</p>
             </span>
             <ul className="features">
               <li>
@@ -287,29 +286,29 @@ export default function Home() {
           </div>
           <div className="pricing-card premium">
             <span className="bonus">
-              <p>1º MÊS COM DESCONTO</p>
+              <p>1º decoração COM DESCONTO</p>
             </span>
             <span className="plan">
               <h3>Premium</h3>
-              <p>Para quem precisa de uma marmita diária, muito saborosa.</p>
+              <p>Para quem precisa de Uma decoração Linda e inesquecivel.</p>
             </span>
             <span className="price">
-              <h2>R$ 89,90</h2>
-              <p>/mês</p>
+              <h2>R$ 350,00</h2>
+              <p>/Apartir</p>
             </span>
             <Button text="Pedir agora" />
             <span className="hr" />
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>2 Entregas</p>
+              <p>2 atendimento no local</p>
             </span>
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>5 Refeições por semana</p>
+              <p>5 Chá de bebe</p>
             </span>
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>2 Sucos por semana</p>
+              <p>2 Reserva antecipada</p>
             </span>
           </div>
         </section>
@@ -394,7 +393,7 @@ export default function Home() {
 
         <div className="footer-bottom">
           <p>
-            Feito com amor na aula de Programação Web💙 ©
+            Feito com amor💙 ©
             {new Date().getFullYear()} AktieTech - Todos os direitos reservados.
           </p>
         </div>
