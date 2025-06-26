@@ -102,7 +102,7 @@ export default function Home() {
     <>
       <header className="container py-sm">
         <nav className="flex items-center justify-between">
-          <img src={Logo} alt="Logo DonaFrost" width={220} height={80} />
+          <img src={Logo} alt="Logo MagiaFesta" width={220} height={80} />
 
           <div className="desktop-only">
             <ul className="flex gap-1">
