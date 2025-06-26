@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react"; 
 import Logo from "../assets/logo.svg";
 import HeroRectangleOne from "../assets/HeroRectangleOne.svg";
 import HeroRectangleTwo from "../assets/rectangleTwo.svg";
@@ -7,6 +7,7 @@ import menu from "../assets/menu.svg";
 import Flor from "../assets/flor.svg";
 import ProfileImageOne from "../assets/Images/Bombardino-Crocodilo.jpeg";
 import ProfileImageTwo from "../assets/Images/Bailarina-Cappuccina.jpeg";
+import profileImageTre from "../assets/Images/Cappuccino-Assassino.jpeg"
 import Check from "../assets/check.svg";
 
 import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
@@ -63,9 +64,9 @@ export default function Home() {
       id: 1,
       imgUrl: ProfileImageOne,
       testemunho:
-        "A representação visual do meme é um bombardeiro militar com a cabeça de um crocodilo, sem qualquer traço de humanização.",
-      name: "Ellon Ma",
-      cargo: "CEO BING CHILLING",
+        "Rapido e Pratico, o aniversário do meu filho foi incrivel graças a Magia Festa cascavel.",
+      name: "Carlos Eduardo",
+      cargo: "Pai super feliz",
       rating: true,
     },
     {
@@ -79,7 +80,7 @@ export default function Home() {
     },
     {
       id: 3,
-      imgUrl: ProfileImageOne,
+      imgUrl: profileImageTre,
       testemunho:
         "O tema da festa de aniversário do meu filho ficou incrível! As crianças amaram e os pais também elogiaram bastante. Serviço de alta qualidade!",
       name: "Bruno Costa",
@@ -123,14 +124,14 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="desktop-only">
+          {/* <div className="desktop-only">
             <div className="flex items-center">
               <a className="reverse-color ml-lg" href="">
                 Login
               </a>
               <Button text="Cadastre-se" />
             </div>
-          </div>
+          </div> */}
 
           <div className="mobile-menu">
             {showMobileMenu ? (
@@ -190,7 +191,7 @@ export default function Home() {
             evento em um momento inesquecível.
           </p>
           <div className="flex gap-1">
-            <Button text="Cadastre-se" />
+            {/* <Button text="Cadastre-se" /> */}
             <span className="desktop-only">
               <Button text="Veja mais" secondary />
             </span>
@@ -394,7 +395,7 @@ export default function Home() {
         <div className="footer-bottom">
           <p>
             Feito com amor💙 ©
-            {new Date().getFullYear()} AktieTech - Todos os direitos reservados.
+            {new Date().getFullYear()} SganderlaTech - Todos os direitos reservados.
           </p>
         </div>
       </footer>
