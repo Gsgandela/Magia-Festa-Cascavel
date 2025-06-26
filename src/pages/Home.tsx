@@ -270,45 +270,45 @@ export default function Home() {
               <h3>Decoração simples</h3>
               <p>Decoração simples sem balões.</p>
             </span>
-            <h2>Grátis</h2>
+            <h2>R$ 350,00</h2>
             <Button text="Pedir agora" secondary />
             <span className="hr" />
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>Montamos na hora</p>
+              <p>Apenas 1 painel</p>
             </span>
             <ul className="features">
               <li>
                 <img src={Check} alt="ícone check" width={24} height={24} />
-                <p>Apenas 1 por CPF</p>
+                <p>Sem montagem</p>
               </li>
             </ul>
           </div>
           <div className="pricing-card premium">
             <span className="bonus">
-              <p>1º decoração COM DESCONTO</p>
+              <p>Decoração completa</p>
             </span>
             <span className="plan">
               <h3>Premium</h3>
               <p>Para quem precisa de Uma decoração Linda e inesquecivel.</p>
             </span>
             <span className="price">
-              <h2>R$ 350,00</h2>
+              <h2>R$ 500,00</h2>
               <p>/Apartir</p>
             </span>
             <Button text="Pedir agora" />
             <span className="hr" />
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>2 atendimento no local</p>
+              <p>2 paineis para fotos</p>
             </span>
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>5 Chá de bebe</p>
+              <p>Montagem no local</p>
             </span>
             <span className="features">
               <img src={Check} alt="ícone check" width={24} height={24} />
-              <p>2 Reserva antecipada</p>
+              <p>Arco de balçoes e lembracinha</p>
             </span>
           </div>
         </section>
