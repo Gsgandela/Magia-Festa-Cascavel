@@ -313,6 +313,7 @@ export default function Home() {
             </span>
           </div>
         </section>
+        
       </section>
       <section id="contact" className="contact-section container">
         <header className="contact-header">
