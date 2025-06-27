@@ -1,93 +1,61 @@
-// src/componentes/contato.tsx
-import React, { useState } from 'react';
-import Button from './button'; 
+const { app } = require('@azure/functions');
+// 1. Importar o cliente de e-mail do Azure Communication Services
+const { EmailClient } = require("@azure/communication-email");
 
-export default function Contato() {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState(''); 
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+// 2. Criar o cliente usando a Connection String das suas configurações
+const connectionString = process.env.ACS_CONNECTION_STRING;
+const emailClient = new EmailClient(connectionString);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateEmail(email)) {
-      setError('Por favor, insira um e-mail válido.');
-      return;
-    }
-
-    if (!name) { 
-      setError('Por favor, insira uma mensagem.');
-      return;
-    }
-
-    setError('');
-    setLoading(true);
-    setSuccessMessage('');
-
+app.http('SendEmailACS', {
+  methods: ['POST'],
+  authLevel: 'function',
+  handler: async (req, context) => {
     try {
-      const cloudFunctionUrl = '(https://claudrunfuction-496327773725.southamerica-east1.run.app)'; 
+      context.log('Requisição recebida para envio via ACS');
 
-      const response = await fetch(cloudFunctionUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': "Bearer token", 
-          'Content-Type': 'application/json', // Uso de 'Content-Type' padronizado
+      // O remetente precisa ser um endereço verificado no seu recurso ACS
+      const senderAddress = process.env.ACS_SENDER_ADDRESS;
+      let recipientAddress = 'gustavo.sganderla@gmail.com';
+      let emailContent = 'Cliente entrou em contato';
+
+      const data = await req.json();
+      if (data?.toMail) recipientAddress = data.toMail;
+      if (data?.content) emailContent = data.content;
+      
+      // 3. Montar a mensagem no formato do ACS
+      const message = {
+        senderAddress: senderAddress,
+        content: {
+          subject: "Contato cliente via site Magia Festa",
+          plainText: emailContent,
         },
-        body: JSON.stringify({ toMail: email, content: name }),
-      });
+        recipients: {
+          to: [
+            {
+              address: recipientAddress,
+              displayName: "Visitante do Site",
+            },
+          ],
+        },
+      };
 
-      if (response.ok) {
-        setSuccessMessage('E-mail enviado com sucesso! Verifique também sua caixa de Spam!');
-        setEmail('');
-        setName('');
-        // O console.log do .then() original, para ver a resposta da Cloud Function se quiser
-        const data = await response.json().catch(() => ({}));
-        console.log('Resposta da Cloud Function:', data);
-      } else {
-        // Tenta parsear o erro como JSON, caso o backend retorne um JSON de erro
-        const errorData = await response.json().catch(() => ({}));
-        setError(`Erro ao enviar e-mail: ${errorData.message || response.statusText}`);
-        console.error('Erro detalhado da Cloud Function:', errorData);
-      }
+      // 4. Enviar o e-mail usando o SDK do ACS
+      const poller = await emailClient.beginSend(message);
+      const response = await poller.pollUntilDone();
+
+      context.log('Email enviado com sucesso via ACS. Message ID:', response.id);
+
+      return {
+        status: 200,
+        body: 'Email enviado com sucesso via Azure Communication Services',
+      };
+
     } catch (err) {
-      console.error('Erro de rede ou na requisição:', err);
-      setError('Erro ao enviar e-mail. Tente novamente mais tarde.');
-    } finally {
-      setLoading(false);
+      context.log.error('Erro ao enviar e-mail via ACS:', err);
+      return {
+        status: 500,
+        body: 'Erro ao enviar e-mail via ACS',
+      };
     }
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      <input
-        type="email"
-        className="contact-input"
-        placeholder="Seu melhor Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <textarea
-        className="contact-textarea"
-        placeholder="Motivo do contato. Ex: Gostei muito do produto X, poderia me enviar um orçamento?"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <Button
-        type="submit"
-        text={loading ? 'Enviando...' : 'Enviar'}
-        disabled={loading}
-      />
-    </form>
-  );
-}
+  }
+});
